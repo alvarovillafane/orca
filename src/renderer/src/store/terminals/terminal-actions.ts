@@ -133,6 +133,7 @@ export type TerminalActions = {
     }
   ) => void
   setTabColor: (tabId: string, color: string | null) => void
+  setTabNotificationsMuted: (tabId: string, muted: boolean) => void
   /** What the tab keeps about the launch that laid out one of its panes; undefined clears it.
    *  `remount` remounts the tab's panes, so one whose spawn was refused spawns again. */
   setTabAgentLaunchPane: (

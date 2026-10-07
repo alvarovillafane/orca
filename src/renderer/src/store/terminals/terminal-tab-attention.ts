@@ -15,6 +15,7 @@ export function createTerminalTabAttentionActions(
   | 'clearTerminalPaneUnread'
   | 'setTabCustomTitle'
   | 'setTabColor'
+  | 'setTabNotificationsMuted'
 > {
   return {
     markTerminalTabUnread: (tabId, reason) => {
@@ -125,6 +126,17 @@ export function createTerminalTabAttentionActions(
           )
         }
       }
+    },
+    setTabNotificationsMuted: (tabId, muted) => {
+      set((s) => {
+        const next = { ...s.tabsByWorktree }
+        for (const wId of Object.keys(next)) {
+          next[wId] = next[wId].map((t) =>
+            t.id === tabId ? { ...t, notificationsMuted: muted || undefined } : t
+          )
+        }
+        return { tabsByWorktree: next }
+      })
     }
   }
 }

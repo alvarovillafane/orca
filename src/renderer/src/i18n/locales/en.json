@@ -18396,7 +18396,9 @@
         "SortableTabContextMenu": {
           "switchToTerminalView": "Switch to terminal view",
           "switchToChatView": "Switch to chat view",
-          "closeTabsToLeft": "Close Tabs To The Left"
+          "closeTabsToLeft": "Close Tabs To The Left",
+          "unmuteNotifications": "Unmute Notifications",
+          "muteNotifications": "Mute Notifications"
         },
         "BrowserTab": {
           "closeOthers": "Close Others",
@@ -18405,6 +18407,9 @@
         "EditorFileTabContextMenu": {
           "closeOthers": "Close Others",
           "closeTabsToLeft": "Close Tabs To The Left"
+        },
+        "SortableTab": {
+          "notificationsMuted": "Notifications muted"
         }
       }
     },
@@ -18736,6 +18741,11 @@
     },
     "agentChildRow": {
       "ended": "Ended"
+    },
+    "sidebar": {
+      "CompactAgentRow": {
+        "notificationsMuted": "Notifications muted"
+      }
     }
   },
   "dashboardPopout": {

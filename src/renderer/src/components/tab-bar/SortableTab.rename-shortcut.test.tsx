@@ -125,6 +125,12 @@ vi.mock('lucide-react', () => ({
   },
   SquareTerminal: function SquareTerminal(props: Record<string, unknown>) {
     return { type: 'SquareTerminal', props }
+  },
+  Volume2: function Volume2(props: Record<string, unknown>) {
+    return { type: 'Volume2', props }
+  },
+  VolumeX: function VolumeX(props: Record<string, unknown>) {
+    return { type: 'VolumeX', props }
   }
 }))
 

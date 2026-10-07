@@ -22,7 +22,10 @@ export type NotificationDispatchMockState = {
   getActiveTab: (worktreeId: string) => Tab | null
   groupsByWorktree: Record<string, TabGroup[]>
   unifiedTabsByWorktree: Record<string, Tab[]>
-  tabsByWorktree: Record<string, { id: string; ptyId?: string | null }[]>
+  tabsByWorktree: Record<
+    string,
+    { id: string; ptyId?: string | null; notificationsMuted?: boolean }[]
+  >
   ptyIdsByTabId: Record<string, string[]>
   suppressedPtyExitIds: Record<string, boolean>
   terminalLayoutsByTabId: Record<string, TerminalLayoutSnapshot>

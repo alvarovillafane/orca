@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useSortable } from '@dnd-kit/sortable'
-import { X, Minimize2, Pin } from 'lucide-react'
+import { X, Minimize2, Pin, VolumeX } from 'lucide-react'
 import { stripLeadingAgentTitleDecoration } from '../../../../shared/agent-title-decoration'
 import { useTabAgent } from '@/lib/use-tab-agent'
 import { isImeCompositionKeyDown } from '@/lib/ime-composition-keyboard-event'
@@ -237,6 +237,15 @@ export default function SortableTab({
       />
       {isPinned && !isEditing && (
         <Pin className="mr-1 size-3 shrink-0 text-muted-foreground" aria-hidden />
+      )}
+      {tab.notificationsMuted && !isEditing && (
+        <VolumeX
+          className="mr-1 size-3 shrink-0 text-muted-foreground"
+          aria-label={translate(
+            'components.tab.bar.SortableTab.notificationsMuted',
+            'Notifications muted'
+          )}
+        />
       )}
       {isEditing ? (
         <Input

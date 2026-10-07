@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef } from 'react'
+import { VolumeX } from 'lucide-react'
 import { DashboardAgentChildDisclosure } from '@/components/dashboard/DashboardAgentChildDisclosure'
 import { AgentStateDot, agentStateLabel } from '@/components/AgentStateDot'
 import { AgentChildRowContent } from '@/components/AgentChildRowContent'
@@ -17,6 +18,7 @@ import { formatShortTimeAgo } from '@/lib/short-time-ago'
 import { agentVerdictStatusLine } from '@/lib/agent-verdict-status-line'
 import { agentRowStoppingLabel } from '@/lib/agent-row-stopping-label'
 import { getCompactAgentLineOrder } from './worktree-card-compact-agent-line-order'
+import { translate } from '@/i18n/i18n'
 
 function getCompactAgentPrimary(
   agent: DashboardAgentRowData,
@@ -260,6 +262,15 @@ export const CompactAgentRow = React.memo(function CompactAgentRow({
         </span>
       )}
       {cacheTimer && <CacheTimer startedAt={cacheTimer.startedAt} ttlMs={cacheTimer.ttlMs} />}
+      {agent.tab.notificationsMuted && (
+        <VolumeX
+          className="size-3 shrink-0 text-muted-foreground/50"
+          aria-label={translate(
+            'components.sidebar.CompactAgentRow.notificationsMuted',
+            'Notifications muted'
+          )}
+        />
+      )}
       {hasChildDisclosure ? (
         <DashboardAgentChildDisclosure
           childAgentCount={childAgentCount}

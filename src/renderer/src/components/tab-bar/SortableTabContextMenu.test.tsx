@@ -65,6 +65,8 @@ vi.mock('lucide-react', () => ({
   Pin: () => null,
   PinOff: () => null,
   SquareTerminal: () => null,
+  Volume2: () => null,
+  VolumeX: () => null,
   X: () => null
 }))
 
