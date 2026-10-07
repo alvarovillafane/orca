@@ -94,7 +94,7 @@ export function getTabLayoutSignature(
 ): string {
   const label = getTabDragLabel(item, generatedTitlesEnabled)
   if (item.type === 'terminal') {
-    return `${item.type}:${item.id}:${item.isPinned}:${isExpanded}:${Boolean(item.data.color)}:${label}`
+    return `${item.type}:${item.id}:${item.isPinned}:${isExpanded}:${Boolean(item.data.color)}:${Boolean(item.data.notificationsMuted)}:${label}`
   }
   if (item.type === 'browser') {
     return `${item.type}:${item.id}:${item.isPinned}:${item.data.loading}:${Boolean(item.data.loadError)}:${label}`

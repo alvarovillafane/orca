@@ -14,6 +14,8 @@ import {
   type AgentStatusEntry
 } from '../../../../shared/agent-status-types'
 import { isSupersededAgentCompletionSnapshot } from './agent-completion-snapshot-staleness'
+import { parsePaneKey } from '../../../../shared/stable-pane-id'
+import { locateTerminalTab } from '@/store/terminals/terminal-tab-location'
 import type {
   AgentCompletionDispatchMeta,
   AgentCompletionStatusSnapshot
@@ -51,6 +53,14 @@ function hasFreshActiveHookStatus(
     snapshot.agentType !== 'unknown' &&
     !shareCompatibleTitleIdentityGroup(snapshot.agentType, explicitTitleAgentType)
   return Boolean(isFreshNonDoneAgentStatus(snapshot) && !titleNamesDifferentKnownAgent)
+}
+
+function isPaneNotificationsMuted(
+  tabsByWorktree: Parameters<typeof locateTerminalTab>[0],
+  paneKey: string | undefined
+): boolean {
+  const tabId = paneKey ? parsePaneKey(paneKey)?.tabId : undefined
+  return Boolean(tabId && locateTerminalTab(tabsByWorktree, tabId)?.tab.notificationsMuted)
 }
 
 export type TerminalNotificationEvent = TerminalNotificationBinding & {
@@ -167,6 +177,9 @@ export function dispatchTerminalNotification(
       : null
 
   const requestDelivery = (request: AgentAttentionDeliveryRequest): void => {
+    if (isPaneNotificationsMuted(state.tabsByWorktree, event.paneKey)) {
+      return
+    }
     deliverAgentAttentionNotification(
       {
         source: event.source,

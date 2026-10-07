@@ -6,6 +6,8 @@ import {
   PinOff,
   Pencil,
   SquareTerminal,
+  Volume2,
+  VolumeX,
   X,
   ListX
 } from 'lucide-react'
@@ -145,6 +147,7 @@ export function SortableTabContextMenu({
   canSplitTerminal = true
 }: SortableTabContextMenuProps): React.JSX.Element {
   const keybindings = useAppStore((state) => state.keybindings)
+  const setTabNotificationsMuted = useAppStore((state) => state.setTabNotificationsMuted)
   const splitRightShortcut = formatShortcutLabel('terminal.splitRight', keybindings)
   const splitDownShortcut = formatShortcutLabel('terminal.splitDown', keybindings)
 
@@ -203,6 +206,24 @@ export function SortableTabContextMenu({
           {isPinned
             ? translate('auto.components.tab.bar.SortableTabContextMenu.417722e9c2', 'Unpin Tab')
             : translate('auto.components.tab.bar.SortableTabContextMenu.60f958ec75', 'Pin Tab')}
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onSelect={() => setTabNotificationsMuted(tab.id, !tab.notificationsMuted)}
+        >
+          {tab.notificationsMuted ? (
+            <Volume2 className="size-3.5 shrink-0" />
+          ) : (
+            <VolumeX className="size-3.5 shrink-0" />
+          )}
+          {tab.notificationsMuted
+            ? translate(
+                'components.tab.bar.SortableTabContextMenu.unmuteNotifications',
+                'Unmute Notifications'
+              )
+            : translate(
+                'components.tab.bar.SortableTabContextMenu.muteNotifications',
+                'Mute Notifications'
+              )}
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onSelect={() => !isPinned && onClose(tab.id)} disabled={isPinned}>

@@ -74,6 +74,8 @@ export type TerminalTab = {
   color: string | null
   /** Pinned tabs survive "close others"; host-persisted for remote servers. */
   isPinned?: boolean
+  /** Skips desktop and mobile alerts from this tab's panes; unread markers still update. */
+  notificationsMuted?: boolean
   /** Per-tab view preference (terminal xterm vs native chat); host-persisted so
    *  paired clients converge. Optional: older persisted tabs default to 'terminal'. */
   viewMode?: 'terminal' | 'chat'

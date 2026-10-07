@@ -82,6 +82,16 @@ const terminalLayoutSnapshotSchema = z.object({
 
 // ─── Terminal tab (legacy) ──────────────────────────────────────────
 
+const aiVaultTitleSchema = z
+  .object({
+    agent: z.enum(['claude', 'codex']),
+    sessionId: z.string(),
+    title: z.string()
+  })
+  .nullable()
+  .optional()
+  .catch(undefined)
+
 const terminalTabSchema = z.object({
   id: terminalTabIdSchema,
   ptyId: z.string().nullable(),
@@ -89,19 +99,12 @@ const terminalTabSchema = z.object({
   title: z.string(),
   defaultTitle: z.string().optional(),
   generatedTitle: z.string().nullable().optional(),
-  aiVaultTitle: z
-    .object({
-      agent: z.enum(['claude', 'codex']),
-      sessionId: z.string(),
-      title: z.string()
-    })
-    .nullable()
-    .optional()
-    .catch(undefined),
+  aiVaultTitle: aiVaultTitleSchema,
   quickCommandLabel: z.string().nullable().optional(),
   customTitle: z.string().nullable(),
   color: z.string().nullable(),
   isPinned: z.boolean().optional(),
+  notificationsMuted: z.boolean().optional(),
   // Why: recovery asks the terminal row who owns the surface, so a row that
   // loses viewMode on reload reads as "not chat-owned" and lets a hidden chat
   // surface remount itself. Declared here so the row survives the parse, with
@@ -147,15 +150,7 @@ const tabSchema = z.object({
     .catch(undefined),
   label: z.string(),
   generatedLabel: z.string().nullable().optional(),
-  aiVaultTitle: z
-    .object({
-      agent: z.enum(['claude', 'codex']),
-      sessionId: z.string(),
-      title: z.string()
-    })
-    .nullable()
-    .optional()
-    .catch(undefined),
+  aiVaultTitle: aiVaultTitleSchema,
   quickCommandLabel: z.string().nullable().optional(),
   customLabel: z.string().nullable(),
   color: z.string().nullable(),
